@@ -1,0 +1,169 @@
+<!doctype html>
+{% load static %}
+{% block content%}
+<html lang="en">
+
+<head>
+    <title>Sidebar 01</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style3.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<body>
+
+    <div class="wrapper d-flex align-items-stretch">
+        <nav id="sidebar">
+            <div class="p-4 pt-5">
+                <a href="#" class="img logo rounded-circle mb-5"></a>
+                <ul class="list-unstyled components mb-5">
+                    <li class="active">
+                        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false"
+                            class="dropdown-toggle">Home</a>
+                        <ul class="collapse list-unstyled" id="homeSubmenu">
+                            <li>
+                                <a class="nav-link" href="formationtab">FORMATEUR LISTE</a>
+                            </li>
+                            <li>
+                                <a class="nav-link" href="dash">DASHBORD</a>
+                            </li>
+                            <li>
+                                <a class="nav-link" href="catg">CATEGORY</a>
+                            </li>
+                            <li>
+                                <a class="nav-link" href="userliste">USER LISTE</a>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">About</a>
+                    </li>
+                    <li>
+                        <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false"
+                            class="dropdown-toggle">Pages</a>
+                        <ul class="collapse list-unstyled" id="pageSubmenu">
+                            <li>
+                                <a href="#">Page 1</a>
+                            </li>
+                            <li>
+                                <a href="#">Page 2</a>
+                            </li>
+                            <li>
+                                <a href="#">Page 3</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">Portfolio</a>
+                    </li>
+                    <li>
+                        <a href="#">Contact</a>
+                    </li>
+                </ul>
+
+
+
+            </div>
+        </nav>
+
+        <!-- Page Content  -->
+        <div id="content" class="p-4 p-md-5">
+
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+
+                    <button type="button" id="sidebarCollapse" class="btn btn-primary">
+                        <i class="fa fa-bars"></i>
+                        <span class="sr-only">Toggle Menu</span>
+                    </button>
+                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="formationtab">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="dash">DASHBORD</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="catg">CATEGORY</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/login">LOGOUT</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+
+
+            <div class="container">
+                <br>
+                <br>
+
+                <div class="card shadow mb-2">
+                    <div class="card-body">
+                        <h1 style="text-align:center;" class="text-dark">Dashboard ds</h1><br>
+         
+
+                        <div class="container mt-4">
+                            <form method="post">
+                                {% csrf_token %}
+                              <div class="form-group">
+                                <label for="exampleInput">Get the best one:</label>
+                                <input name="bestone" type="text" class="form-control" id="exampleInput" placeholder="chose a skils">
+                              </div>
+                              <button type="submit" class="btn btn-primary">search</button>
+                            </form>
+                          </div>
+
+                          {% if messages %}
+                          {% for message in messages %}
+                          <div class="alert alert-danger text-center" role="alert">
+                           {{ message }}
+                          </div>
+                          {%endfor%}
+                          {%endif%}
+
+                          {% if bestone %}
+                          {% for item in bestone %}
+                              <div class="card">
+                                  <div class="card-body">
+                                      <h5 class="card-title">{{ item.0.title_cv }}</h5>
+                                      <p class="card-text">ID: {{ item.0.id }}</p>
+                                      <p class="card-text">Experience: {{ item.0.experience }}</p>
+                                      <p class="card-text">Skills: {{ item.0.skills }}</p>
+                                      <p class="card-text">Interest: {{ item.0.interest }}</p>
+                                      <p class="card-text">Education: {{ item.0.education }}</p>
+                                      <p class="card-text">Project: {{ item.0.prjct }}</p>
+                                  </div>
+                              </div>
+                          {% endfor %}
+                      {% else %}
+                          <p>No data available.</p>
+                      {% endif %}
+                      
+
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'ss/js/jquery.min.js' %}"></script>
+    <script src="{% static 'ss/js/popper.js' %}"></script>
+    <script src="{% static '/ss/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'ss/js/main.js' %}"></script>
+</body>
+
+</html>
+{% endblock content%}
